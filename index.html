@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RentMate</title>
+  <style>
+    body { font-family: Arial; margin:0; padding:0; background:#f5f6fa; }
+    header { background:#4f46e5; color:white; padding:15px 30px; display:flex; justify-content:space-between; align-items:center; }
+    header nav a { color:white; margin-left:20px; text-decoration:none; font-weight:bold; }
+    header nav span { margin-left:20px; font-weight:bold; color: #ffeb3b; }
+    section.hero { text-align:center; padding:40px 20px; background:linear-gradient(to right, #4f46e5, #6366f1); color:white; }
+    .search-bar { display:flex; justify-content:center; margin-top:20px; }
+    .search-bar input { padding:10px; width:300px; border:none; border-radius:5px 0 0 5px; }
+    .search-bar button { padding:10px 20px; border:none; background:#ff9800; color:white; font-weight:bold; border-radius:0 5px 5px 0; cursor:pointer; }
+    #searchResult { text-align:center; margin-top:10px; font-weight:bold; }
+
+    /* ✅ Property cards styling */
+    section.properties { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:20px; padding:30px; }
+    .property { background:white; border-radius:10px; overflow:hidden; box-shadow:0 2px 8px rgba(0,0,0,0.1); }
+    .property img { width:100%; height:200px; object-fit:cover; }
+    .property .info { padding:15px; }
+    .property .info h3 { margin:0; color:#333; }
+    .property .info p { margin:5px 0; color:#666; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>🏠 RentMate</h1>
+    <nav id="navbar">
+     
+      <a href="index.html">होम</a>
+      <a href="searchProperty.html">प्रॉपर्टी खोजें</a>
+      <a href="addProperty.html">जोड़ें</a>
+      <a href="myProperty.html">मेरी प्रॉपर्टीज़</a>
+     
+      <a href="login.html" id="loginLink">Login</a>
+       <a href="account.html">MY ACCOUNT</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h2>अपना सपनों का घर खोजें</h2>
+    <div class="search-bar">
+      <input type="text" id="searchInput" placeholder="शहर या क्षेत्र दर्ज करें...">
+      <button onclick="searchProperty()">खोजें</button>
+    </div>
+    <p id="searchResult"></p>
+  </section>
+
+ 
+  <section class="properties">
+    <div class="property">
+      <img src="https://picsum.photos/400/200?random=1" alt="Property 1">
+      <div class="info">
+        <h3>2 BHK Flat</h3>
+        <p>स्थान: दिल्ली</p>
+        <p>किराया: ₹15,000/माह</p>
+      </div>
+    </div>
+
+    <div class="property">
+      <img src="https://picsum.photos/400/200?random=2" alt="Property 2">
+      <div class="info">
+        <h3>3 BHK Apartment</h3>
+        <p>स्थान: लखनऊ</p>
+        <p>किराया: ₹22,000/माह</p>
+      </div>
+    </div>
+
+    <div class="property">
+      <img src="https://picsum.photos/400/200?random=3" alt="Property 3">
+      <div class="info">
+        <h3>1 BHK Room</h3>
+        <p>स्थान: नोएडा</p>
+        <p>किराया: ₹9,000/माह</p>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // ✅ User check
+    const user = localStorage.getItem("loggedInUser");
+    const navbar = document.getElementById("navbar");
+    const loginLink = document.getElementById("loginLink");
+
+    if(user){
+      // Login link हटाओ और username दिखाओ
+      loginLink.style.display = "none";
+      navbar.innerHTML += `<span>👤 ${user}</span>`;
+    }
+
+    // Dummy search function
+    function searchProperty(){
+      const query = document.getElementById("searchInput").value;
+      document.getElementById("searchResult").innerText = query 
+        ? `🔍 "${query}" के लिए परिणाम खोजे जा रहे हैं...` 
+        : "⚠️ कृपया कुछ डालें!";
+    }
+  </script>
+
+</body>
+</html>

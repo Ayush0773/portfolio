@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <title>नई प्रॉपर्टी जोड़ें - RentMate</title>
+  <style>
+    body { font-family: Arial; background:#f5f6fa; margin:0; padding:0; }
+    header { background:#4f46e5; color:white; padding:15px 30px; display:flex; justify-content:space-between; align-items:center; }
+    header nav a { color:white; margin-left:20px; text-decoration:none; font-weight:bold; }
+    header nav span { margin-left:20px; font-weight:bold; color:#ffeb3b; }
+    section { padding:20px; }
+    h2 { text-align:center; }
+    form { background:white; padding:20px; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,0.2); max-width:400px; margin:0 auto; }
+    label { display:block; margin:10px 0 5px; }
+    input { width:100%; padding:10px; border:1px solid #ccc; border-radius:5px; margin-bottom:10px; }
+    button { width:100%; padding:10px; background:#4f46e5; color:white; border:none; border-radius:5px; cursor:pointer; font-weight:bold; }
+    #message { text-align:center; font-weight:bold; margin-top:15px; color:green; }
+  </style>
+</head>
+<body>
+
+  <!-- ✅ Same Navbar -->
+  <header>
+    <h1>🏠 RentMate</h1>
+    <nav id="navbar">
+      <a href="index.html">होम</a>
+      <a href="searchProperty.html">प्रॉपर्टी खोजें</a>
+      <a href="addProperty.html">जोड़ें</a>
+      <a href="myProperty.html">मेरी प्रॉपर्टीज़</a>
+     
+      <a href="login.html" id="loginLink">Login</a>
+    </nav>
+  </header>
+
+  <section>
+    <h2>नई प्रॉपर्टी जोड़ें</h2>
+    <form id="addPropertyForm">
+      <label>🏠 प्रॉपर्टी का नाम / टाइटल:</label>
+      <input type="text" id="title" required>
+
+      <label>📍 शहर:</label>
+      <input type="text" id="city" required>
+
+      <label>💰 कीमत (₹/माह):</label>
+      <input type="number" id="price" required>
+
+      <label>🖼️ इमेज लिंक:</label>
+      <input type="url" id="image" placeholder="https://example.com/image.jpg">
+
+      <button type="submit">✅ जोड़ें</button>
+    </form>
+    <p id="message"></p>
+  </section>
+
+  <script>
+    // ✅ User check
+    const user = localStorage.getItem("loggedInUser");
+    const navbar = document.getElementById("navbar");
+    const loginLink = document.getElementById("loginLink");
+
+    if(user){
+      loginLink.style.display = "none";
+      navbar.innerHTML += `<span>👤 ${user}</span>`;
+    }
+
+    // ✅ Add Property
+    document.getElementById("addPropertyForm").addEventListener("submit", function(e){
+      e.preventDefault();
+
+      const title = document.getElementById("title").value;
+      const city = document.getElementById("city").value;
+      const price = document.getElementById("price").value;
+      const image = document.getElementById("image").value || "https://picsum.photos/seed/default/400/200";
+
+      let properties = JSON.parse(localStorage.getItem("properties")) || [];
+
+      properties.push({ title, city, price, image });
+      localStorage.setItem("properties", JSON.stringify(properties));
+
+      document.getElementById("message").innerText = `✅ ${title} (${city} • ₹${price}/माह) सफलतापूर्वक जोड़ दिया गया!`;
+
+      // form clear
+      document.getElementById("addPropertyForm").reset();
+    });
+  </script>
+
+</body>
+</html>

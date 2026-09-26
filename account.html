@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RentMate - मेरा अकाउंट</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin:0; padding:0; background:#f4f4f9; }
+    header { background:#4f46e5; color:white; padding:15px 30px; display:flex; justify-content:space-between; align-items:center; }
+    header a { color:white; text-decoration:none; margin-left:15px; font-weight:bold; }
+
+    .account-box {
+      max-width:400px; margin:50px auto; background:white; padding:20px; border-radius:10px; 
+      box-shadow:0 2px 8px rgba(0,0,0,0.1); text-align:center;
+    }
+    .account-box h2 { margin-bottom:20px; }
+    .account-box p { font-size:16px; margin:8px 0; }
+    button { padding:10px 20px; background:#ff9800; color:white; border:none; border-radius:5px; cursor:pointer; margin-top:20px; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>🏠 RentMate</h1>
+    <nav id="navbar">
+      
+      <a href="index.html">होम</a>
+      <a href="searchProperty.html">प्रॉपर्टी खोजें</a>
+      <a href="addProperty.html">जोड़ें</a>
+      <a href="myProperty.html">मेरी प्रॉपर्टीज़</a>
+     
+      <a href="account.html">MY ACCOUNT</a>
+      <a href="login.html" id="loginLink">Login</a>
+    </nav>
+  </header>
+
+<div class="account-box" id="accountBox">
+  <h2>👤 मेरा अकाउंट</h2>
+  <p><strong>नाम:</strong> <span id="accName"></span></p>
+  <p><strong>Email:</strong> <span id="accEmail"></span></p>
+  <button onclick="logout()">🚪 लॉगआउट</button>
+</div>
+
+<script>
+const user = JSON.parse(localStorage.getItem("loggedInUser"));
+
+if(user) {
+  document.getElementById("accName").innerText = user.name;
+  document.getElementById("accEmail").innerText = user.email;
+} else {
+  document.getElementById("accountBox").innerHTML = "<p>⚠️ कृपया पहले लॉगिन करें।</p>";
+}
+
+// Logout function
+function logout() {
+  localStorage.removeItem("loggedInUser");
+  alert("🚪 आप लॉगआउट हो गए हैं।");
+  window.location.href = "index.html"; // वापस Home ले जाएगा
+}
+</script>
+
+</body>
+</html>

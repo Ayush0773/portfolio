@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotify</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    #nav {
+        display: flex;
+        font-size: 26px;
+        padding: 5px;
+        background-color: black;
+        color: white;
+    }
+
+    #logo {
+        display: flex;
+        margin-left: 30px;
+    }
+
+    #logo p {
+        margin-left: 10px;
+        margin-top: 3px;
+    }
+
+    #logo img:hover {
+        background-color: red;
+
+    }
+
+    #logo img {
+        height: auto;
+        width: 28px;
+    }
+
+    #menu {
+        display: flex;
+    }
+
+    #home {
+        margin-left: 100px;
+        margin-top: 3px;
+    }
+
+    #home:hover {
+        background-color: white;
+        color: black;
+        padding: 0px 5px;
+        border-radius: 20px;
+    }
+
+    #about {
+        margin-left: 10px;
+        margin-top: 3px;
+        text-align: center;
+        justify-content: center;
+    }
+
+    #about:hover {
+        background-color: white;
+        color: black;
+        padding: 0px 5px;
+        border-radius: 20px;
+    }
+
+
+
+
+    #container {
+        background-color: black;
+        margin-top: 20px;
+        margin-left: 40px;
+        margin-right: 10px;
+        color: white;
+        border-radius: 20px;
+        font-family: 'Times New Roman', Times, serif;
+        background-image: url(girl2.jpg);
+        height: 520px;
+        width: 1265px;
+    }
+
+    h1 {
+        margin-left: 20px;
+
+    }
+
+    #progressbar {
+        text-align: center;
+        color: black;
+        width: 65%;
+        height: 20px;
+        justify-content: center;
+        margin-left: 270px;
+        background-color: black;
+    }
+
+
+    #songBanner img {
+        height: 60px;
+        width: 50px;
+        margin-left: 50px;
+        border-radius: 50px;
+
+    }
+
+    #icons {
+        display: flex;
+
+    }
+
+    #icons img {
+        height: 40px;
+        margin-top: 0px;
+
+    }
+
+    #forward img {
+        margin-left: 660px;
+
+    }
+
+    #first {
+        width: 50%;
+
+        justify-content: space-between;
+        display: flex;
+    }
+    #second{
+        display: flex;
+        justify-content: space-between;
+        width: 50%;
+    }
+    #third{
+        display: flex;
+        justify-content: space-between;
+        width: 50%;
+    }
+    #fourth{
+        display: flex;
+        justify-content: space-between;
+        width: 50%;
+    }
+</style>
+
+<body>
+    <div id="nav">
+        <div id="logo">
+            <img src="Spotify_icon.svg.png" alt="">
+            <p>Spotify</p>
+        </div>
+        <div id="menu">
+            <div id="home"> Home</div>
+            <div id="about"> About</div>
+        </div>
+        
+    </div>
+
+    <div id="container">
+        <h1>Best of NCS-No copy right sounds</h1>
+        <br><br>
+        <div id="songBanner">
+            <div id="first">
+
+                <div id="image"> <img src="banner3.jfif" alt=""><span style="font-size: 25px;">Tere Liye </span></div>
+                <span>
+                    <div id="audio"><audio controls>
+                            <source src="Tere Liye Prince 320 Kbps.mp3" type="audio/ogg">
+                            <source src="Tere Liye Prince 320 Kbps.mp3" type="audio/mpeg">
+
+                        </audio>
+                    </div>
+                </span>
+            </div>
+            <br><br><br>
+            <div id="second">
+               <div> <img src="honeyBanner3.jfif" alt=""><span style="font-size: 25px;">Blue Eyes</span></div>
+               <audio controls>
+                        <source src="Blue-Eyes(PaglaSongs).mp3" type="audio/ogg">
+                        <source src="Blue-Eyes(PaglaSongs).mp3" type="audio/mpeg">
+
+                    </audio>
+               
+            </div>
+            <br><br><br>
+            <div id="third">
+             <div>   <img src="banner2.jfif" alt=""><span style="font-size: 25px;">Kesariya</span></div>
+               
+                    <div><audio controls>
+                        <source src="Kesariya Brahmastra 128 Kbps.mp3" type="audio/ogg">
+                        <source src="Kesariya Brahmastra 128 Kbps.mp3" type="audio/mpeg">
+
+                         </audio>
+                    </div>
+                </div>
+                <br><br><br>
+            <div id="fourth">
+              <div>  <img src="banner.jfif" alt=""><span style="font-size: 25px;">Tum hi ho</span></div>
+                <span>
+                    <div><audio controls>
+                        <source src="Tum Hi Ho Aashiqui 2 128 Kbps.mp3" type="audio/ogg">
+                        <source src="Tum Hi Ho Aashiqui 2 128 Kbps.mp3" type="audio/mpeg">
+
+                    </audio>
+                </div>
+              
+          
+            </div>
+          
+        </div>
+      
+        <div id="songItem"></div>
+    </div>
+
+    <div id="bottom"><input type="range" style="border: 2px solid black; " id="progressbar" min="0" max="100"></div>
+    <div id="icons">
+        <div id="forward"><img src="forward icon.png" alt=""></div>
+        <div id="pause"><img src="pause.png" alt=""></div>
+        <div id="backward"><img src="backward icon.png" alt=""></div>
+    </div>
+</body>
+
+</html>

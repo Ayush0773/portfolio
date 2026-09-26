@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>calculater</title>
+</head>
+<style>
+    button {
+        padding: 12px;
+        margin: 3px;
+        height: 50px;
+        width: 40px;
+        border-style: none;
+        box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.555);
+        border-radius: 5px;
+        
+        /* padding: 17px; */
+
+    }
+    #main{
+        border-radius: 20px solid black;
+        text-align: center;
+        padding: 40px;
+        margin: 20px;
+        box-shadow:0px 0px 8px rgba(0, 0, 0, 0.671) ;
+        width: 250px;
+        border-radius: 100px;
+        background-color: #fff;
+        box-shadow: 0 0 10px;
+        margin-left: 500px;
+        margin-top: 80px;
+    }
+    h1{
+        text-align: center;
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        
+    }
+  
+</style>
+
+<body>
+    <h1>CALCULATOR</h1>
+    <div id="cal">
+    <div id="main">
+        <input type="text" id="display" style=" font-size: 15px; width: 80%; height: 20px; border: 2px solid rgba(0, 0, 0, 0.829);border-radius: 40px; color:black">
+        <div>
+            <button onclick="getdata('1')">1</button>
+            <button onclick="getdata('2')">2</button>
+            <button onclick="getdata('3')">3</button>
+            <button onclick="getdata('+')">+</button>
+        </div>
+        <div>
+            <button onclick="getdata('4')">4</button>
+            <button onclick="getdata('5')">5</button>
+        <button onclick="getdata('6')">6</button>
+        <button onclick="getdata('-')">-</button>
+    </div>
+    <div>
+        <button onclick="getdata('7')">7</button>
+        <button onclick="getdata('8')">8</button>
+        <button onclick="getdata('9')">9</button>
+        <button onclick="getdata('*')">*</button>
+    </div>
+    <div>
+        <button onclick="getdata('.')">.</button>
+        <button onclick="getdata('0')">0</button>
+        <button onclick="getdata('/')">/</button>
+        <button onclick="calculate()">=</button>
+    </div>
+    <div>
+        <button id="clear" onclick="cleardata()">C</button>
+    </div>
+    
+</div>
+</div>
+    <script>
+        var display = document.getElementById("display")
+        function getdata(data) {
+
+            display.value += data
+        }
+
+        function calculate() {
+            display.value = eval(display.value)
+        }
+        function cleardata() {
+            window.alert("clear screen")
+            display.value = ""
+        }
+
+    </script>
+</body>
+
+</html>

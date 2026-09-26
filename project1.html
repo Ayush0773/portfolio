@@ -1,0 +1,66 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<style>
+    #main{
+        text-align: center;
+        border-radius: 50px ;
+        /* border: 2px dashed black; */
+        width: 500px;
+        /* height: 300px; */
+        margin-top: 100px;
+        justify-content: center;
+        margin-left: 380px;
+        box-shadow: 0 0 20px;
+        background-color: #fff;
+        padding-bottom: 10px;
+    }
+   #container{
+    /* border: 2px solid black; */
+    width: auto;
+    height: auto;
+   }
+</style>
+
+<body>
+<div id="main" >
+    <h1 >Unit convertor</h1>
+    <div id="container">
+        
+        <label><h3>Feet</h3></label>
+        <input type="number" value="" id="feet" style="border-radius: 20px;">
+        <br><br><br>
+        <label><h3>inches</h3></label>
+        <input type="number" value="" id="inches" style="border-radius: 20px;" >
+        
+        
+    </div>
+    <!-- <button type="submit" id="btn">Find</button>   --> 
+</div>
+<script>
+    // let btn=document.getElementById("btn")
+    var feet=document.getElementById("feet")
+    var inch=document.getElementById("inches")
+
+    feet.addEventListener("input",convertor)
+    inch.addEventListener("input",convertTofeet)
+      
+function convertor(){
+    inch.value= feet.value * 12 
+}
+
+function convertTofeet(){
+    feet.value=inch.value/12
+
+}
+    </script>
+</body>
+
+</html>

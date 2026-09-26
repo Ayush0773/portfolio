@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - RentMate</title>
+  <style>
+    body { font-family: Arial; background:#f5f6fa; display:flex; justify-content:center; align-items:center; height:100vh; }
+    .form-box { background:white; padding:20px; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,0.2); width:300px; }
+    h2 { text-align:center; }
+    input { width:100%; padding:10px; margin:10px 0; border:1px solid #ccc; border-radius:5px; }
+    button { width:100%; padding:10px; background:#4f46e5; color:white; border:none; border-radius:5px; cursor:pointer; }
+    p { text-align:center; margin-top:10px; }
+    a { color:#4f46e5; text-decoration:none; }
+    #message { color:red; text-align:center; margin-top:10px; }
+  </style>
+</head>
+<body>
+
+<div class="form-box">
+  <h2>Login</h2>
+  <input type="text" id="username" placeholder="यूज़रनेम" required>
+  <input type="password" id="password" placeholder="पासवर्ड" required>
+  <button onclick="login()">Login</button>
+  <p>नया अकाउंट चाहिए? <a href="REGISTER.html">Register</a></p>
+  <p id="message"></p>
+</div>
+
+<script>
+function login() {
+  const username = document.getElementById("username").value;
+  const password = document.getElementById("password").value;
+  const messageEl = document.getElementById("message");
+
+  // Existing users from localStorage
+  let users = JSON.parse(localStorage.getItem("users")) || [];
+  const user = users.find(u => u.username === username && u.password === password);
+
+  if(user){
+    // --- OTP Demo ---
+    let otp = Math.floor(1000 + Math.random() * 9000); // 4-digit OTP
+    alert("आपका OTP है: " + otp);
+
+    let userOtp = prompt("Enter the OTP sent to you:");
+    if(userOtp == otp){
+      localStorage.setItem("loggedInUser", username);
+      alert("✅ Login Successful! Welcome " + username);
+      window.location.href = "index.html"; // Redirect to home
+    } else {
+      messageEl.innerText = "❌ गलत OTP। फिर कोशिश करें।";
+    }
+
+  } else {
+    messageEl.innerText = "❌ Invalid username/password!";
+  }
+}
+</script>
+
+</body>
+</html>

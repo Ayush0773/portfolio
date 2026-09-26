@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <title>मेरी प्रॉपर्टीज़ - RentMate</title>
+  <style>
+    body { font-family: Arial; background:#f5f6fa; margin:0; padding:0; }
+    header { background:#4f46e5; color:white; padding:15px 30px; display:flex; justify-content:space-between; align-items:center; }
+    header nav a { color:white; margin-left:20px; text-decoration:none; font-weight:bold; }
+    header nav span { margin-left:20px; font-weight:bold; color:#ffeb3b; }
+    section { padding:20px; }
+    h2 { text-align:center; }
+    #message { text-align:center; font-weight:bold; margin-bottom:10px; color:green; }
+    .properties { display:grid; grid-template-columns:repeat(auto-fit, minmax(250px,1fr)); gap:20px; }
+    .card { background:white; border-radius:10px; overflow:hidden; box-shadow:0 2px 6px rgba(0,0,0,0.1); text-align:center; padding:10px; }
+    .card img { width:100%; height:150px; object-fit:cover; border-radius:5px; }
+    .card button { background:#4f46e5; color:white; border:none; padding:5px 10px; border-radius:5px; cursor:pointer; margin-top:8px; }
+    .card button.pay { background:green; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>🏠 RentMate</h1>
+    <nav id="navbar">
+      <a href="index.html">होम</a>
+      <a href="searchProperty.html">प्रॉपर्टी खोजें</a>
+      <a href="addProperty.html">जोड़ें</a>
+      <a href="myProperty.html">मेरी प्रॉपर्टीज़</a>
+      <a href="login.html" id="loginLink">Login</a>
+    </nav>
+  </header>
+
+  <section>
+    <h2>मेरी प्रॉपर्टीज़</h2>
+    <p id="message"></p>
+    <div class="properties" id="propertyList"></div>
+  </section>
+
+  <script>
+    const user = localStorage.getItem("loggedInUser");
+    const navbar = document.getElementById("navbar");
+    const loginLink = document.getElementById("loginLink");
+    const message = document.getElementById("message");
+
+    if(user){
+      loginLink.style.display = "none";
+      navbar.innerHTML += `<span>👤 ${user}</span>`;
+    }
+
+    const propertyList = document.getElementById("propertyList");
+
+    // Load properties
+    function loadProperties() {
+      let properties = JSON.parse(localStorage.getItem("properties")) || [];
+      propertyList.innerHTML = "";
+
+      if(properties.length === 0) {
+        propertyList.innerHTML = "<p style='text-align:center;'>❌ आपने अभी तक कोई प्रॉपर्टी नहीं जोड़ी।</p>";
+        return;
+      }
+
+      // Show all properties
+      properties.forEach((prop, index) => {
+        const card = document.createElement("div");
+        card.className = "card";
+        card.innerHTML = `
+          <img src="${prop.image || `https://picsum.photos/seed/${prop.title.replace(/\s/g,'')}${index}/400/200`}" alt="${prop.title}">
+          <h3>${prop.title}</h3>
+          <p>📍 ${prop.city} • ₹${prop.price}/माह</p>
+          <button class="pay" onclick="payRent(${index})">💰 Rent Pay</button>
+          <button onclick="deleteProperty(${index})">🗑 हटाएं</button>
+        `;
+        propertyList.appendChild(card);
+      });
+    }
+
+    // Delete property
+    function deleteProperty(index) {
+      let properties = JSON.parse(localStorage.getItem("properties")) || [];
+      const removed = properties.splice(index, 1); 
+      localStorage.setItem("properties", JSON.stringify(properties));
+      message.innerText = `✅ "${removed[0].title}" हटाई गई।`;
+      loadProperties();
+    }
+
+    // Pay Rent Simulation
+    function payRent(index) {
+      let properties = JSON.parse(localStorage.getItem("properties")) || [];
+      const prop = properties[index];
+      let transactions = JSON.parse(localStorage.getItem("transactions")) || [];
+      transactions.push({title: prop.title, date: new Date().toLocaleString()});
+      localStorage.setItem("transactions", JSON.stringify(transactions));
+
+      alert(`✅ Rent for "${prop.title}" paid successfully!`);
+    }
+
+    // Initial load
+    loadProperties();
+  </script>
+
+</body>
+</html>

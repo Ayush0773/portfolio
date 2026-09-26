@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <title>प्रॉपर्टी खोजें - RentMate</title>
+  <style>
+    body { font-family: Arial; background:#f5f6fa; margin:0; padding:0; }
+    header { background:#4f46e5; color:white; padding:15px 30px; display:flex; justify-content:space-between; align-items:center; }
+    header nav a { color:white; margin-left:20px; text-decoration:none; font-weight:bold; }
+    header nav span { margin-left:20px; font-weight:bold; color:#ffeb3b; }
+    .search-bar { text-align:center; padding:20px; }
+    .search-bar input { padding:10px; width:250px; border-radius:5px; border:1px solid #ccc; }
+    .search-bar button { padding:10px 20px; border:none; background:#ff9800; color:white; font-weight:bold; border-radius:5px; cursor:pointer; }
+    .properties { display:grid; grid-template-columns:repeat(auto-fit, minmax(250px,1fr)); gap:20px; padding:20px; }
+    .property { background:white; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,0.1); overflow:hidden; }
+    .property img { width:100%; height:180px; object-fit:cover; }
+    .info { padding:10px; }
+    .info h3 { margin:0; }
+    .info p { margin:5px 0; color:#555; }
+  </style>
+</head>
+<body>
+
+
+  <header>
+    <h1>🏠 RentMate</h1>
+    <nav id="navbar">
+      <a href="index.html">होम</a>
+      <a href="searchProperty.html">प्रॉपर्टी खोजें</a>
+      <a href="addProperty.html">जोड़ें</a>
+      <a href="myProperty.html">मेरी प्रॉपर्टीज़</a>
+      <a href="payment.html">भुगतान</a>  
+      <a href="login.html" id="loginLink">Login</a>
+    </nav>
+  </header>
+
+  <div class="search-bar">
+    <input type="text" id="searchInput" placeholder="शहर या नाम से खोजें...">
+    <button onclick="searchProperty()">खोजें</button>
+  </div>
+
+  <section class="properties" id="propertyList"></section>
+
+  <script>
+     
+    const user = localStorage.getItem("loggedInUser");
+    const navbar = document.getElementById("navbar");
+    const loginLink = document.getElementById("loginLink");
+
+    if(user){
+      loginLink.style.display = "none";
+      navbar.innerHTML += `<span>👤 ${user}</span>`;
+    }
+
+    let properties = JSON.parse(localStorage.getItem("properties")) || [];
+
+    function displayProperties(list){
+      const container = document.getElementById("propertyList");
+      container.innerHTML = "";
+      if(list.length === 0){
+        container.innerHTML = "<p style='text-align:center;'>❌ कोई प्रॉपर्टी नहीं मिली</p>";
+        return;
+      }
+
+      list.forEach(p => {
+        container.innerHTML += `
+          <div class="property">
+            <img src="${p.image}" alt="Property">
+            <div class="info">
+              <h3>${p.title}</h3>
+              <p>📍 ${p.city}</p>
+              <p>💰 ₹${p.price}/माह</p>
+            </div>
+          </div>
+        `;
+      });
+    }
+
+    // First load
+    displayProperties(properties);
+
+    // Search function
+    function searchProperty(){
+      const query = document.getElementById("searchInput").value.toLowerCase();
+      const filtered = properties.filter(p => 
+        p.title.toLowerCase().includes(query) || 
+        p.city.toLowerCase().includes(query)
+      );
+      displayProperties(filtered);
+    }
+  </script>
+
+</body>
+</html>
